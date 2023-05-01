@@ -39,14 +39,6 @@ export default function Laptop() {
         rotation={[0.2, 0.2, 0]}
         cursor={true}
       >
-        {/* <rectAreaLight
-          width={2.5}
-          height={1.65}
-          intensity={65}
-          color={"#ffaa99"}
-          rotation={[-0.1, Math.PI, 0]}
-          position={[0, 0.55, -1.15]}
-        /> */}
         <Float floatIntensity={1}>
           <NativeLaptop
             open={laptopMove}

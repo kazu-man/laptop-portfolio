@@ -26,9 +26,7 @@ type pcStatus = {
 export default function NativeLaptop({ open, openMove, url }: pcStatus) {
   const group = useRef<Group>(null);
   const topPart = useRef<Group>(null);
-  const { nodes, materials } = useGLTF(
-    "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("./macbook.gltf") as GLTFResult;
 
   //PC開閉処理
   const { setMoveActive } = useLaptopOpen(topPart, open);
@@ -213,6 +211,14 @@ export default function NativeLaptop({ open, openMove, url }: pcStatus) {
           >
             <iframe src={url} />
           </Html>
+          <rectAreaLight
+            width={2.5}
+            height={1.65}
+            intensity={15}
+            color={"#ffffff"}
+            rotation={[-0.1, Math.PI, 0]}
+            position={[0, 0, 0]}
+          />
         </group>
         <group position={[12.2, 0.03, 0.6]} scale={5.8}>
           <mesh

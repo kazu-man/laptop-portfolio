@@ -3,17 +3,17 @@ import { useRef } from "react";
 import { Vector3 } from "three";
 import { SpotLight } from "@react-three/drei";
 
-export default function MovingSpot({ vec = new Vector3(), ...props }) {
+export default function MovingSpot({ ...props }) {
   const light = useRef<typeof SpotLight | any>(null!);
   const viewport = useThree((state) => state.viewport);
   useFrame((state) => {
     if (!light.current) return;
 
     light.current.target.position.lerp(
-      vec.set(
-        (state.mouse.x * viewport.width) / 2,
-        (state.mouse.y * viewport.height) / 2,
-        0
+      new Vector3(
+        (state.mouse.x * viewport.width) / 5,
+        -(state.mouse.y * viewport.height) / 5,
+        -(state.mouse.y * viewport.height) / 5
       ),
       0.1
     );
@@ -26,9 +26,9 @@ export default function MovingSpot({ vec = new Vector3(), ...props }) {
       penumbra={1.5}
       distance={8}
       angle={0.35}
-      attenuation={3}
+      attenuation={6}
       anglePower={7}
-      intensity={10}
+      intensity={3}
       shadowCameraFov={undefined}
       shadowCameraLeft={undefined}
       shadowCameraRight={undefined}
