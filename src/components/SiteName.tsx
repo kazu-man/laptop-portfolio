@@ -1,57 +1,63 @@
-import { Float, Text, useCursor } from "@react-three/drei";
-import { useState } from "react";
+import { useCursor } from "@react-three/drei";
+import { useMemo, useRef, useState } from "react";
+import Title from "./Title";
 
-type siteNameProps = {
+export type siteNameProps = {
   urls: {
     id: number;
     title: string;
     url: string;
   }[];
   setSelectedUrlId: React.Dispatch<React.SetStateAction<number>>;
-  selectedUrlId: number;
 };
-export default function SiteName({
-  urls,
-  setSelectedUrlId,
-  selectedUrlId,
-}: siteNameProps) {
+export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
   const [hovered, setHover] = useState(false);
-  const [hoveredId, setHoveredId] = useState(0);
-
   useCursor(hovered);
+  const referredSelectedId = useRef(1); // selectedUrlIdをTitleに渡したいが、レンダリングしてしまうのでrefをかます
 
-  return (
-    <Float
-      speed={0.5} // Animation speed, defaults to 1
-      rotationIntensity={0.5} // XYZ rotation intensity, defaults to 1
-      floatIntensity={0.5}
-    >
-      {urls.map((val, index) => (
-        <Text
-          key={val.id}
-          position={[2, 2 - index * 0.3, 2]}
-          rotation={[0, -Math.PI * 0.1, 0]}
-          scale={[0.2, 0.2, 0.2]}
-          onClick={() => setSelectedUrlId(val.id)}
-          onPointerOver={() => {
-            setHoveredId(val.id);
-            setHover(true);
-          }}
-          onPointerOut={() => {
-            setHoveredId(0);
-            setHover(false);
-          }}
-          color={
-            selectedUrlId === val.id
-              ? "yellow"
-              : hoveredId === val.id
-              ? "white"
-              : "gray"
-          }
-        >
-          {val.title}
-        </Text>
-      ))}
-    </Float>
-  );
+  const cursorIn = () => {
+    setHover(true);
+  };
+  const cursorOut = () => {
+    setHover(false);
+  };
+
+  const randomPosition = (): [number, number, number] => {
+    let randomX = (Math.random() - 0.4) * 3;
+    if (randomX > 0) {
+      randomX += 2.5;
+    } else {
+      randomX -= 2.5;
+    }
+
+    const randomY = Math.random() * 10;
+    const randomZ = (Math.random() - 0.3) * 2;
+
+    return [randomX, randomY, randomZ];
+  };
+
+  const blocks = useMemo(() => {
+    const updateId = (id: number) => {
+      setSelectedUrlId(id);
+      referredSelectedId.current = id;
+    };
+
+    return (
+      <>
+        {urls.map((val, index) => (
+          <Title
+            setSelectedUrlId={updateId}
+            key={index}
+            urls={val}
+            textPosition={randomPosition()}
+            cursorIn={cursorIn}
+            cursorOut={cursorOut}
+            selectedUrlId={referredSelectedId}
+          />
+        ))}
+      </>
+    );
+  }, []);
+
+  return <>{blocks}</>;
 }

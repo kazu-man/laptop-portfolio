@@ -2,6 +2,7 @@ import { ContactShadows, Float, PresentationControls } from "@react-three/drei";
 import NativeLaptop from "./NativeLaptop";
 import { useState } from "react";
 import SiteName from "./SiteName";
+import { RigidBody } from "@react-three/rapier";
 export default function Laptop() {
   const [laptopMove, setLaptopMove] = useState(false);
   const urls = [
@@ -45,19 +46,17 @@ export default function Laptop() {
         cursor={true}
       >
         <Float floatIntensity={1}>
-          <NativeLaptop
-            open={laptopMove}
-            openMove={setLaptopMove}
-            url={selectedItem?.url}
-          />
+          <RigidBody type="fixed">
+            <NativeLaptop
+              open={laptopMove}
+              openMove={setLaptopMove}
+              url={selectedItem?.url}
+            />
+          </RigidBody>
         </Float>
       </PresentationControls>
       <ContactShadows position-y={-1} opacity={0.4} scale={5} blur={2.4} />
-      <SiteName
-        urls={urls}
-        selectedUrlId={selectedUrlId}
-        setSelectedUrlId={setSelectedUrlId}
-      />
+      <SiteName urls={urls} setSelectedUrlId={setSelectedUrlId} />
     </>
   );
 }

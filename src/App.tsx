@@ -3,7 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import LapTop from "./components/Laptop";
 import MovingSpot from "./components/MovingSpot";
 import { Loader } from "@react-three/drei";
-import Title from "./components/Title";
+import { Physics } from "@react-three/rapier";
+import Floor from "./components/Floor";
 function App() {
   return (
     <>
@@ -19,17 +20,15 @@ function App() {
         }}
       >
         <color attach="background" args={["#202020"]} />
-        <fog attach="fog" args={["#202020", 6, 8.5]} />
+        <fog attach="fog" args={["#202020", 6, 20]} />
         <ambientLight intensity={0.06} />
-        <Title />
-        <LapTop />
         <MovingSpot position={[4, 5, 0]} color="#ffff00" />
         <MovingSpot position={[-4, 5, 0]} color="#ff00ff" />
         <MovingSpot position={[0, 5, 2]} color="#00f0f0" />
-        <mesh receiveShadow position={[0, 0, 0]} rotation-x={-Math.PI / 2}>
-          <planeGeometry args={[50, 50]} />
-          <meshPhongMaterial />
-        </mesh>
+        <Physics>
+          <LapTop />
+          <Floor />
+        </Physics>
       </Canvas>
       <Loader />
     </>
