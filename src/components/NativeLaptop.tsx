@@ -26,7 +26,7 @@ type pcStatus = {
 export default function NativeLaptop({ open, openMove, url }: pcStatus) {
   const group = useRef<Group>(null);
   const topPart = useRef<Group>(null);
-  const { nodes, materials } = useGLTF("./macbook.gltf") as GLTFResult;
+  const { nodes, materials } = useGLTF("/macbook.gltf") as GLTFResult;
 
   //PC開閉処理
   const { setMoveActive } = useLaptopOpen(topPart, open);
@@ -253,9 +253,7 @@ export default function NativeLaptop({ open, openMove, url }: pcStatus) {
   );
 }
 
-useGLTF.preload(
-  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
-);
+useGLTF.preload("/macbook.gltf");
 
 //PCの開閉処理
 function useLaptopOpen(topPart: React.RefObject<Group>, open: boolean) {

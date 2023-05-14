@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import LapTop from "./components/Laptop";
 import MovingSpot from "./components/MovingSpot";
 import { Loader } from "@react-three/drei";
+import Title from "./components/Title";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
         <color attach="background" args={["#202020"]} />
         <fog attach="fog" args={["#202020", 6, 8.5]} />
         <ambientLight intensity={0.06} />
+        <Title />
         <LapTop />
         <MovingSpot position={[4, 5, 0]} color="#ffff00" />
         <MovingSpot position={[-4, 5, 0]} color="#ff00ff" />
