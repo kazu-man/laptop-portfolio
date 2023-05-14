@@ -7,21 +7,26 @@ export default function Laptop() {
   const urls = [
     {
       id: 1,
+      title: "Sift Link copy site",
+      url: "https://shift-link-copy-site.vercel.app/",
+    },
+    {
+      id: 2,
       title: "Shoes copy site",
       url: "https://d7z2e3isl4ewg.cloudfront.net/",
     },
     {
-      id: 2,
+      id: 3,
       title: "Monato copy site",
       url: "https://d1lfpwvow4w05v.cloudfront.net/",
     },
     {
-      id: 3,
+      id: 4,
       title: "Scroll copy site",
       url: "https://d13deghd9i5lpg.cloudfront.net/",
     },
     {
-      id: 4,
+      id: 5,
       title: "Anime copy site",
       url: "https://d2isjk15o9hzi9.cloudfront.net/",
     },

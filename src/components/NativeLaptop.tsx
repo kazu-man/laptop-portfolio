@@ -261,7 +261,7 @@ useGLTF.preload(
 function useLaptopOpen(topPart: React.RefObject<Group>, open: boolean) {
   const [moveActive, setMoveActive] = useState(false);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     const currentX = topPart?.current?.rotation.x || 0;
 
     //アクションがなければ終了
