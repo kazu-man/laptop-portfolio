@@ -4,7 +4,7 @@ export default function Floor() {
   return (
     <RigidBody type="fixed">
       <mesh receiveShadow position={[0, 0, 0]} rotation-x={-Math.PI / 2}>
-        <planeGeometry args={[50, 50]} />
+        <planeGeometry args={[50, 50, 3]} />
         <meshPhongMaterial />
       </mesh>
     </RigidBody>

@@ -29,7 +29,9 @@ export default function Title({
   const lightPosition = [textPosition[0], lightY, textPosition[2]];
 
   const light = useRef<typeof SpotLight | any>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial>(null!);
+  const materialRef = useRef<THREE.MeshStandardMaterial>(
+    null as unknown as THREE.MeshStandardMaterial
+  );
   const textRef = useRef<RigidBodyApi>(null);
 
   const lightTargetObj = new THREE.Object3D();
@@ -120,7 +122,7 @@ export default function Title({
             setSelectedUrlId(urls.id);
           }}
         >
-          My
+          M
           <meshStandardMaterial ref={materialRef} color="#f09030" />
         </Text3D>
       </RigidBody>

@@ -57,6 +57,7 @@ export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
         ))}
       </>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{blocks}</>;

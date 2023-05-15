@@ -4,7 +4,7 @@ import { Vector3 } from "three";
 import { SpotLight } from "@react-three/drei";
 
 export default function MovingSpot({ ...props }) {
-  const light = useRef<typeof SpotLight | any>(null!);
+  const light = useRef<typeof SpotLight | any>(null);
   const viewport = useThree((state) => state.viewport);
   useFrame((state) => {
     if (!light.current) return;

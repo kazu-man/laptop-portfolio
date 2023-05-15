@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import LapTop from "./components/Laptop";
 import MovingSpot from "./components/MovingSpot";
 import { Loader } from "@react-three/drei";
-import { Physics } from "@react-three/rapier";
+import { Debug, Physics } from "@react-three/rapier";
 import Floor from "./components/Floor";
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
         <MovingSpot position={[-4, 5, 0]} color="#ff00ff" />
         <MovingSpot position={[0, 5, 2]} color="#00f0f0" />
         <Physics>
+          {/* <Debug /> */}
           <LapTop />
           <Floor />
         </Physics>
