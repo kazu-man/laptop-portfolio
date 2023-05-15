@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import LapTop from "./components/Laptop";
 import MovingSpot from "./components/MovingSpot";
 import { Loader } from "@react-three/drei";
-import { Debug, Physics } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import Floor from "./components/Floor";
 function App() {
   return (

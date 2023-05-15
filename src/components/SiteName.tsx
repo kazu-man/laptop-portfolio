@@ -7,6 +7,7 @@ export type siteNameProps = {
     id: number;
     title: string;
     url: string;
+    model: string;
   }[];
   setSelectedUrlId: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -57,7 +58,7 @@ export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
         ))}
       </>
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{blocks}</>;
