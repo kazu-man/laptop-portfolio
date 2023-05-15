@@ -1,20 +1,16 @@
 import { useCursor } from "@react-three/drei";
 import { useMemo, useRef, useState } from "react";
-import Title from "./Title";
+import SiteNameObject from "./SiteNameObject";
+import { urlsType } from "./Laptop";
 
-export type siteNameProps = {
-  urls: {
-    id: number;
-    title: string;
-    url: string;
-    model: string;
-  }[];
-  setSelectedUrlId: React.Dispatch<React.SetStateAction<number>>;
-};
-export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
+export default function FallingObjects({
+  urls,
+  setSelectedUrlId,
+}: siteNameProps) {
   const [hovered, setHover] = useState(false);
-  useCursor(hovered);
   const referredSelectedId = useRef(1); // selectedUrlIdをTitleに渡したいが、レンダリングしてしまうのでrefをかます
+
+  useCursor(hovered);
 
   const cursorIn = () => {
     setHover(true);
@@ -37,7 +33,7 @@ export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
     return [randomX, randomY, randomZ];
   };
 
-  const blocks = useMemo(() => {
+  const siteNameObject = useMemo(() => {
     const updateId = (id: number) => {
       setSelectedUrlId(id);
       referredSelectedId.current = id;
@@ -46,11 +42,11 @@ export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
     return (
       <>
         {urls.map((val, index) => (
-          <Title
+          <SiteNameObject
             setSelectedUrlId={updateId}
             key={index}
             urls={val}
-            textPosition={randomPosition()}
+            objectPosition={randomPosition()}
             cursorIn={cursorIn}
             cursorOut={cursorOut}
             selectedUrlId={referredSelectedId}
@@ -61,5 +57,10 @@ export default function SiteName({ urls, setSelectedUrlId }: siteNameProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{blocks}</>;
+  return <>{siteNameObject}</>;
 }
+
+export type siteNameProps = {
+  urls: urlsType[];
+  setSelectedUrlId: React.Dispatch<React.SetStateAction<number>>;
+};

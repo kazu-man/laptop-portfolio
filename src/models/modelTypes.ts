@@ -1,11 +1,8 @@
 import { GLTF } from "three-stdlib";
+import { urlsType } from "../components/Laptop";
 
 export type ModelProps = {
-  urls: {
-    id: number;
-    title: string;
-    url: string;
-  };
+  urls: urlsType;
   cursorIn: () => void;
   cursorOut: () => void;
   setSelectedUrlId: (id: number) => void;

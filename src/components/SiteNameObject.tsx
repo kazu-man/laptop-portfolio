@@ -8,74 +8,34 @@ import Ruby from "../models/Ruby";
 import Virus from "../models/Virus";
 import ReactLogo from "../models/ReactLogo";
 import Cactus from "../models/Cactus";
+import { urlsType } from "./Laptop";
 
-type TitleProps = {
-  textPosition: [number, number, number];
-  urls: {
-    id: number;
-    title: string;
-    url: string;
-    model: string;
-  };
-  cursorIn: () => void;
-  cursorOut: () => void;
-  selectedUrlId: MutableRefObject<number>;
-  setSelectedUrlId: (id: number) => void;
-};
-
-export default function Title({
-  textPosition,
+export default function SiteNameObject({
+  objectPosition,
   urls,
   cursorIn,
   cursorOut,
   selectedUrlId,
   setSelectedUrlId,
-}: TitleProps) {
+}: SiteNameObjectProps) {
   const lightY = 5;
   const titleY = 10;
-  const lightPosition = [textPosition[0], lightY, textPosition[2]];
-  const titlePosition = [textPosition[0], titleY, textPosition[2]];
+  const lightPosition = [objectPosition[0], lightY, objectPosition[2]];
+  const titlePosition = [objectPosition[0], titleY, objectPosition[2]];
 
-  const light = useRef<typeof SpotLight | any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion
+  const lightRef = useRef<typeof SpotLight | any>(null!);
+  const textRef = useRef<RigidBodyApi>(null);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const titleRef = useRef<THREE.Group>(null!);
   const materialRef = useRef<THREE.MeshStandardMaterial>(
     null as unknown as THREE.MeshStandardMaterial
   );
-  const textRef = useRef<RigidBodyApi>(null);
 
   const lightTargetObj = new THREE.Object3D();
-  lightTargetObj.position.set(...(textPosition as [number, number, number]));
-
-  const titleRef = useRef<THREE.Group>(null!);
-
-  const getEmissiveColor = () => {
-    return selectedUrlId.current === urls.id
-      ? new THREE.Color("#ff0000")
-      : new THREE.Color("#000000");
-  };
+  lightTargetObj.position.set(...(objectPosition as [number, number, number]));
 
   const textColor = useRef(getEmissiveColor());
-
-  useFrame(() => {
-    textColor.current = getEmissiveColor();
-
-    const position = textRef.current?.translation();
-    if (position) {
-      const { x, y, z } = position;
-
-      lightTargetObj.position.x = x;
-      lightTargetObj.position.y = y;
-      lightTargetObj.position.z = z;
-      light.current.target.updateMatrixWorld();
-
-      titleRef.current.position.x = x;
-      titleRef.current.position.y = y + 1;
-      titleRef.current.position.z = z;
-    }
-
-    materialRef.current.emissive = textColor.current;
-    materialRef.current.needsUpdate = true;
-  });
-
   const modelValues = {
     cursorIn,
     cursorOut,
@@ -83,6 +43,11 @@ export default function Title({
     urls,
   };
 
+  function getEmissiveColor() {
+    return selectedUrlId.current === urls.id
+      ? new THREE.Color("#ff0000")
+      : new THREE.Color("#000000");
+  }
   const getModel = (modelName: string) => {
     switch (modelName) {
       case "taxi":
@@ -98,10 +63,31 @@ export default function Title({
     }
   };
 
+  useFrame(() => {
+    textColor.current = getEmissiveColor();
+
+    const position = textRef.current?.translation();
+    if (position) {
+      const { x, y, z } = position;
+
+      lightTargetObj.position.x = x;
+      lightTargetObj.position.y = y;
+      lightTargetObj.position.z = z;
+      lightRef.current.target.updateMatrixWorld();
+
+      titleRef.current.position.x = x;
+      titleRef.current.position.y = y + 1;
+      titleRef.current.position.z = z;
+    }
+
+    materialRef.current.emissive = textColor.current;
+    materialRef.current.needsUpdate = true;
+  });
+
   return (
     <>
       <SpotLight
-        ref={light}
+        ref={lightRef}
         castShadow
         penumbra={1.5}
         distance={10}
@@ -109,6 +95,12 @@ export default function Title({
         attenuation={0.3}
         anglePower={10}
         intensity={2.5}
+        position={
+          lightPosition
+            ? new THREE.Vector3(...lightPosition)
+            : new THREE.Vector3()
+        }
+        target={lightTargetObj}
         shadowCameraFov={undefined}
         shadowCameraLeft={undefined}
         shadowCameraRight={undefined}
@@ -119,12 +111,6 @@ export default function Title({
         shadowBias={undefined}
         shadowMapWidth={undefined}
         shadowMapHeight={undefined}
-        position={
-          lightPosition
-            ? new THREE.Vector3(...lightPosition)
-            : new THREE.Vector3()
-        }
-        target={lightTargetObj}
       />
       <Center
         ref={titleRef}
@@ -170,8 +156,8 @@ export default function Title({
         colliders="cuboid"
         ref={textRef}
         position={
-          textPosition
-            ? new THREE.Vector3(...textPosition)
+          objectPosition
+            ? new THREE.Vector3(...objectPosition)
             : new THREE.Vector3()
         }
         rotation={[Math.random(), Math.random(), Math.random()]}
@@ -181,3 +167,12 @@ export default function Title({
     </>
   );
 }
+
+type SiteNameObjectProps = {
+  objectPosition: [number, number, number];
+  urls: urlsType;
+  cursorIn: () => void;
+  cursorOut: () => void;
+  selectedUrlId: MutableRefObject<number>;
+  setSelectedUrlId: (id: number) => void;
+};
