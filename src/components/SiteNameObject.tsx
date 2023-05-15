@@ -1,7 +1,7 @@
 import { Center, Float, SpotLight, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody, RigidBodyApi } from "@react-three/rapier";
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject, RefObject, useRef } from "react";
 import * as THREE from "three";
 import Taxi from "../models/Taxi";
 import Ruby from "../models/Ruby";
@@ -35,53 +35,17 @@ export default function SiteNameObject({
   const lightTargetObj = new THREE.Object3D();
   lightTargetObj.position.set(...(objectPosition as [number, number, number]));
 
-  const textColor = useRef(getEmissiveColor());
-  const modelValues = {
+  const { getModel } = useModelFrameLogic({
     cursorIn,
     cursorOut,
     setSelectedUrlId,
     urls,
-  };
-
-  function getEmissiveColor() {
-    return selectedUrlId.current === urls.id
-      ? new THREE.Color("#ff0000")
-      : new THREE.Color("#000000");
-  }
-  const getModel = (modelName: string) => {
-    switch (modelName) {
-      case "taxi":
-        return <Taxi {...modelValues} />;
-      case "virus":
-        return <Virus {...modelValues} />;
-      case "reactLogo":
-        return <ReactLogo {...modelValues} />;
-      case "cactus":
-        return <Cactus {...modelValues} />;
-      case "ruby":
-        return <Ruby {...modelValues} />;
-    }
-  };
-
-  useFrame(() => {
-    textColor.current = getEmissiveColor();
-
-    const position = textRef.current?.translation();
-    if (position) {
-      const { x, y, z } = position;
-
-      lightTargetObj.position.x = x;
-      lightTargetObj.position.y = y;
-      lightTargetObj.position.z = z;
-      lightRef.current.target.updateMatrixWorld();
-
-      titleRef.current.position.x = x;
-      titleRef.current.position.y = y + 1;
-      titleRef.current.position.z = z;
-    }
-
-    materialRef.current.emissive = textColor.current;
-    materialRef.current.needsUpdate = true;
+    selectedUrlId,
+    lightTargetObj,
+    lightRef,
+    textRef,
+    titleRef,
+    materialRef,
   });
 
   return (
@@ -166,6 +130,84 @@ export default function SiteNameObject({
       </RigidBody>
     </>
   );
+}
+
+function useModelFrameLogic({
+  cursorIn,
+  cursorOut,
+  setSelectedUrlId,
+  urls,
+  selectedUrlId,
+  lightTargetObj,
+  lightRef,
+  textRef,
+  titleRef,
+  materialRef,
+}: {
+  urls: urlsType;
+  cursorIn: () => void;
+  cursorOut: () => void;
+  selectedUrlId: MutableRefObject<number>;
+  setSelectedUrlId: (id: number) => void;
+  lightTargetObj: THREE.Object3D<THREE.Event>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  lightRef: MutableRefObject<any>;
+  textRef: RefObject<RigidBodyApi>;
+  titleRef: MutableRefObject<THREE.Group>;
+  materialRef: MutableRefObject<THREE.MeshStandardMaterial>;
+}) {
+  const textColor = useRef(getEmissiveColor());
+  const modelValues = {
+    cursorIn,
+    cursorOut,
+    setSelectedUrlId,
+    urls,
+  };
+
+  function getEmissiveColor() {
+    return selectedUrlId.current === urls.id
+      ? new THREE.Color("#ff0000")
+      : new THREE.Color("#000000");
+  }
+  const getModel = (modelName: string) => {
+    switch (modelName) {
+      case "taxi":
+        return <Taxi {...modelValues} />;
+      case "virus":
+        return <Virus {...modelValues} />;
+      case "reactLogo":
+        return <ReactLogo {...modelValues} />;
+      case "cactus":
+        return <Cactus {...modelValues} />;
+      case "ruby":
+        return <Ruby {...modelValues} />;
+    }
+  };
+
+  useFrame(() => {
+    textColor.current = getEmissiveColor();
+
+    const position = textRef.current?.translation();
+    if (position) {
+      const { x, y, z } = position;
+
+      lightTargetObj.position.x = x;
+      lightTargetObj.position.y = y;
+      lightTargetObj.position.z = z;
+      lightRef.current.target.updateMatrixWorld();
+
+      titleRef.current.position.x = x;
+      titleRef.current.position.y = y + 1;
+      titleRef.current.position.z = z;
+    }
+
+    materialRef.current.emissive = textColor.current;
+    materialRef.current.needsUpdate = true;
+  });
+
+  return {
+    getModel,
+  };
 }
 
 type SiteNameObjectProps = {
