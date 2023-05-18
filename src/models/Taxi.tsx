@@ -27,82 +27,122 @@ export default function Taxi(props: ModelProps) {
       }}
     >
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008.geometry}
         material={materials.paintWhite}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_1.geometry}
         material={nodes.Mesh_body008_1.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_2.geometry}
         material={nodes.Mesh_body008_2.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_3.geometry}
         material={materials.lightFront}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_4.geometry}
         material={nodes.Mesh_body008_4.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_5.geometry}
         material={materials.window}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_6.geometry}
         material={materials.carTire}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_body008_7.geometry}
         material={nodes.Mesh_body008_7.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_grill001.geometry}
         material={nodes.Mesh_grill001.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_grill001_1.geometry}
         material={nodes.Mesh_grill001_1.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_grill001_2.geometry}
         material={nodes.Mesh_grill001_2.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_grill001_3.geometry}
         material={nodes.Mesh_grill001_3.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight010.geometry}
         material={nodes.Mesh_wheel_frontRight010.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight010_1.geometry}
         material={nodes.Mesh_wheel_frontRight010_1.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight011.geometry}
         material={nodes.Mesh_wheel_frontRight011.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight011_1.geometry}
         material={nodes.Mesh_wheel_frontRight011_1.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight012.geometry}
         material={nodes.Mesh_wheel_frontRight012.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight012_1.geometry}
         material={nodes.Mesh_wheel_frontRight012_1.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight009.geometry}
         material={nodes.Mesh_wheel_frontRight009.material}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Mesh_wheel_frontRight009_1.geometry}
         material={nodes.Mesh_wheel_frontRight009_1.material}
       />

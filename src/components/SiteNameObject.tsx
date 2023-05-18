@@ -1,7 +1,7 @@
 import { Center, Float, SpotLight, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody, RigidBodyApi } from "@react-three/rapier";
-import { MutableRefObject, RefObject, useRef } from "react";
+import { MutableRefObject, RefObject, useEffect, useRef } from "react";
 import * as THREE from "three";
 import Taxi from "../models/Taxi";
 import Ruby from "../models/Ruby";
@@ -47,6 +47,10 @@ export default function SiteNameObject({
     titleRef,
     materialRef,
   });
+
+  useEffect(() => {
+    lightRef.current.shadow.normalBias = 0.02;
+  }, []);
 
   return (
     <>

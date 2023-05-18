@@ -36,6 +36,8 @@ export default function ReactLogo(props: ModelProps) {
         material={material}
         position={[0, 1.31, 0]}
         rotation={[0, Math.PI / 2, 0]}
+        castShadow
+        receiveShadow
       >
         <mesh
           geometry={nodes.Torus001.geometry}
@@ -43,6 +45,8 @@ export default function ReactLogo(props: ModelProps) {
           position={[0.34, -0.08, 0.02]}
           rotation={[-0.16, 0, -Math.PI / 2]}
           scale={[3.75, 1.47, 3]}
+          castShadow
+          receiveShadow
         />
         <mesh
           geometry={nodes.Torus003.geometry}
@@ -50,6 +54,8 @@ export default function ReactLogo(props: ModelProps) {
           position={[-0.04, -0.11, 0]}
           rotation={[0.89, 0, -Math.PI / 2]}
           scale={[3.75, 1.47, 3]}
+          castShadow
+          receiveShadow
         />
         <mesh
           geometry={nodes.Torus002.geometry}
@@ -57,6 +63,8 @@ export default function ReactLogo(props: ModelProps) {
           position={[-0.52, -0.1, 0.16]}
           rotation={[-1.18, 0, -Math.PI / 2]}
           scale={[3.75, 1.47, 3]}
+          castShadow
+          receiveShadow
         />
       </mesh>
     </group>

@@ -1,5 +1,5 @@
 import { useThree, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { SpotLight } from "@react-three/drei";
 
@@ -20,6 +20,10 @@ export default function MovingSpot({ ...props }) {
     );
     light.current.target.updateMatrixWorld();
   });
+
+  useEffect(() => {
+    light.current.shadow.normalBias = 0.02;
+  }, []);
 
   return (
     <SpotLight
