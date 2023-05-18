@@ -1,6 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import useLoadGltf from "../hooks/useLoadGltf";
 import * as THREE from "three";
+import { RigidBody } from "@react-three/rapier";
 export default function Cup() {
   const obj = useLoadGltf("/Cup.glb");
   const textMesh = obj.scene.children.find(
@@ -29,15 +30,17 @@ export default function Cup() {
   });
   return (
     <>
-      <mesh
-        position={[2.5, 0, 2.5]}
-        scale={0.8}
-        rotation={[0, -Math.PI / 4, 0]}
-        castShadow
-        receiveShadow
-      >
-        <primitive object={obj.scene} scale={[0.5, 0.5, 0.5]} castShadow />
-      </mesh>
+      <RigidBody>
+        <mesh
+          position={[2.5, 3, 2.5]}
+          scale={0.8}
+          rotation={[Math.PI / 10, -Math.PI / 4, Math.PI / 10]}
+          castShadow
+          receiveShadow
+        >
+          <primitive object={obj.scene} scale={[0.5, 0.5, 0.5]} castShadow />
+        </mesh>
+      </RigidBody>
       <pointLight
         position={[3.5, 0.1, 5]}
         color="white"

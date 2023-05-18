@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import LapTop from "./components/Laptop";
 import MovingSpot from "./components/MovingSpot";
 import { Loader } from "@react-three/drei";
-import {  Physics } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import Floor from "./components/Floor";
 import Cup from "./models/Cup";
 function App() {
@@ -29,9 +29,9 @@ function App() {
         <Physics>
           {/* <Debug /> */}
           <LapTop />
+          <Cup />
           <Floor />
         </Physics>
-        <Cup />
       </Canvas>
       <Loader />
     </>
