@@ -28,7 +28,7 @@ export default function Cup() {
         <mesh
           position={[2.5, 0, 2.5]}
           scale={0.8}
-            rotation={[0, -Math.PI / 4, 0]}
+          rotation={[0, -Math.PI / 4, 0]}
           castShadow
           receiveShadow
         >
@@ -39,11 +39,11 @@ export default function Cup() {
         castShadow
         penumbra={1}
         distance={10}
-        angle={0.2}
+        angle={0.15}
         attenuation={0}
         anglePower={0}
         intensity={1}
-        position={[2.5, 5, 2.5]}
+        position={[2, 5, 3.5]}
         target={lightTargetObj}
         shadowCameraFov={undefined}
         shadowCameraLeft={undefined}
