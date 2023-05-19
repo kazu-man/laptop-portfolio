@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { RigidBody } from "@react-three/rapier";
 import { SpotLight } from "@react-three/drei";
 import Coffee from "./Coffee";
+import Smoke from "./Smoke";
 
 export default function Cup() {
   const obj = useLoadGltf("/Cup.glb");
@@ -64,6 +65,15 @@ export default function Cup() {
         surfaceColor="#d47050"
         moveSpeed={0.001}
         position={[2.5, 0.7, 2.5]}
+      />
+      {/* 重い場合はコメントアウト */}
+      <Smoke
+        amplify={2.3}
+        depthColor="#745030"
+        surfaceColor="#ffffff"
+        moveSpeed={0.001}
+        rotation={[0, Math.PI / 2.5, 0]}
+        position={[1.9, 0, 4.8]}
       />
     </>
   );

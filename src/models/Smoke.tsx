@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import vertexShader from "../shaders/coffee/vertex.glsl";
-import fragmentShader from "../shaders/coffee/fragment.glsl";
+import vertexShader from "../shaders/smoke/vertex.glsl";
+import fragmentShader from "../shaders/smoke/fragment.glsl";
 
 type backgroundAnimationProps = {
   rotation?: number[];
@@ -13,7 +13,7 @@ type backgroundAnimationProps = {
   moveSpeed?: number;
 };
 
-export default function Coffee({
+export default function Smoke({
   rotation,
   position,
   amplify,
@@ -27,7 +27,7 @@ export default function Coffee({
     >(null);
 
   const planePositions = useMemo(() => {
-    const planeGeometry = new THREE.PlaneGeometry(6, 6, 100, 100);
+    const planeGeometry = new THREE.PlaneGeometry(6, 6, 800, 800);
     const positions: Float32Array = Float32Array.from(
       (planeGeometry.attributes.position as THREE.BufferAttribute).array
     );
@@ -76,13 +76,13 @@ export default function Coffee({
         },
       },
     }),
-    [amplify, depthColor, surfaceColor, moveSpeed]
+    [amplify, depthColor, moveSpeed, surfaceColor]
   );
 
   useFrame(() => {
     shaderArgs.uniforms.uTime.value++;
     if (ref.current) {
-      ref.current.rotation.z -= 0.005;
+      ref.current.rotation.z += 0.005;
     }
   });
 
@@ -94,7 +94,7 @@ export default function Coffee({
         position={
           position ? new THREE.Vector3(...position) : new THREE.Vector3()
         }
-        scale={0.13}
+        scale={[1, 1, 1]}
       >
         <bufferGeometry attach="geometry">
           <bufferAttribute
