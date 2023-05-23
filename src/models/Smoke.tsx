@@ -27,7 +27,7 @@ export default function Smoke({
     >(null);
 
   const planePositions = useMemo(() => {
-    const planeGeometry = new THREE.PlaneGeometry(6, 6, 800, 800);
+    const planeGeometry = new THREE.PlaneGeometry(2, 2, 150, 150);
     const positions: Float32Array = Float32Array.from(
       (planeGeometry.attributes.position as THREE.BufferAttribute).array
     );

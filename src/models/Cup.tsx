@@ -68,12 +68,12 @@ export default function Cup() {
       />
       {/* 重い場合はコメントアウト */}
       <Smoke
-        amplify={2.3}
+        amplify={0.4}
         depthColor="#745030"
         surfaceColor="#ffffff"
         moveSpeed={0.001}
-        rotation={[0, Math.PI / 2.5, 0]}
-        position={[1.9, 0, 4.8]}
+        rotation={[0, Math.PI / 2, 0]}
+        position={[2.9, 0, 3]}
       />
     </>
   );

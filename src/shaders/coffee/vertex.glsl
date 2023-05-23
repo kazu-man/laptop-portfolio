@@ -224,7 +224,7 @@ void main() {
   pos.z += aRandomness * 2.0 * sin(uTime /100.0);
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-  gl_PointSize =  4.0  + (aSize / 2.0);
+  gl_PointSize =  10.0  + (aSize / 2.0);
 
   vPosition = pos;
   vElevation = elevation;
